@@ -100,6 +100,8 @@ Render and Railway both support Flask apps directly:
 3. Set the `SECRET_KEY` config value to something random before going live
    (currently `"dev"` in `app.py` — fine for local use, not for a public demo).
 
+4. This application is live on render, just go and explore - https://grocery-store-8dsd.onrender.com
+
 ## Notes
 
 - Passwords are hashed with Werkzeug's `generate_password_hash` — never
