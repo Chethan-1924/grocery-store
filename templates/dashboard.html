@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-head">
+  <span class="eyebrow">Overview</span>
+  <h1 class="page-title">Dashboard</h1>
+</div>
+
+<div class="stat-grid">
+  <div class="card stat-card">
+    <span class="stat-icon green">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8M1 3h22v5H1zM10 12h4"/></svg>
+    </span>
+    <div>
+      <p class="stat-label">Total products</p>
+      <p class="stat-value">{{ total_products }}</p>
+    </div>
+  </div>
+  <div class="card stat-card">
+    <span class="stat-icon green">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    </span>
+    <div>
+      <p class="stat-label">Orders today</p>
+      <p class="stat-value">{{ today_order_count }}</p>
+    </div>
+  </div>
+  <div class="card stat-card">
+    <span class="stat-icon orange">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+    </span>
+    <div>
+      <p class="stat-label">Revenue today</p>
+      <p class="stat-value">₹{{ "%.2f"|format(today_revenue) }}</p>
+    </div>
+  </div>
+</div>
+
+<div class="two-col">
+  <div class="card panel">
+    <h2>Low stock alerts</h2>
+    {% if low_stock %}
+    <table class="data-table">
+      <thead><tr><th>Product</th><th>Remaining</th></tr></thead>
+      <tbody>
+        {% for p in low_stock %}
+        <tr>
+          <td>{{ p['name'] }}</td>
+          <td class="warn">{{ p['stock_qty'] }} {{ p['unit'] }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="muted">Nothing low on stock right now.</p>
+    {% endif %}
+  </div>
+
+  <div class="card panel">
+    <h2>Recent orders</h2>
+    {% if recent_orders %}
+    <table class="data-table">
+      <thead><tr><th>Order #</th><th>Total</th><th></th></tr></thead>
+      <tbody>
+        {% for o in recent_orders %}
+        <tr>
+          <td>{{ o['order_number'] }}</td>
+          <td>₹{{ "%.2f"|format(o['total_amount']) }}</td>
+          <td><a href="{{ url_for('main.order_detail', order_id=o['id']) }}" class="link">View</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="muted">No orders yet — head to Billing to create one.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

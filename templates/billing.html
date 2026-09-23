@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Billing{% endblock %}
+{% block content %}
+<div class="page-head">
+  <span class="eyebrow">Point of Sale</span>
+  <h1 class="page-title">Billing</h1>
+</div>
+
+<div class="billing-grid">
+  <div class="card panel">
+    <div class="panel-head">
+      <h2>Products</h2>
+      <input type="text" id="billing-search" placeholder="Search products..." />
+    </div>
+    <div id="billing-products" class="product-grid"></div>
+  </div>
+
+  <div class="card panel cart-panel">
+    <h2>Current bill</h2>
+    <table class="data-table" id="cart-table">
+      <thead><tr><th>Item</th><th>Qty</th><th>Total</th><th></th></tr></thead>
+      <tbody id="cart-tbody"></tbody>
+    </table>
+    <div class="cart-total">
+      <span>Grand total</span>
+      <span id="cart-grand-total">₹0.00</span>
+    </div>
+    <p id="checkout-error" class="error-text"></p>
+    <button id="checkout-btn" class="btn btn-primary" style="width:100%; justify-content:center;">
+      Complete sale
+    </button>
+  </div>
+</div>
+
+<div id="receipt-modal" class="modal hidden">
+  <div class="card modal-box">
+    <span class="eyebrow">Order complete</span>
+    <h2 id="receipt-order-number"></h2>
+    <div id="receipt-items"></div>
+    <div class="cart-total"><span>Total</span><span id="receipt-total"></span></div>
+    <button class="btn btn-primary" id="receipt-close" style="width:100%; justify-content:center; margin-top:16px;">
+      New sale
+    </button>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/billing.js') }}"></script>
+{% endblock %}

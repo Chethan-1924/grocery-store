@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Order {{ order['order_number'] }}{% endblock %}
+{% block content %}
+<div class="page-head">
+  <span class="eyebrow">Receipt</span>
+  <h1 class="page-title">{{ order['order_number'] }}</h1>
+</div>
+<p class="muted">Cashier: {{ order['username'] or '—' }} · {{ order['created_at'] }}</p>
+
+<div class="card panel" style="margin-top: 20px;">
+  <table class="data-table">
+    <thead><tr><th>Item</th><th>Qty</th><th>Unit price</th><th>Line total</th></tr></thead>
+    <tbody>
+      {% for i in items %}
+      <tr>
+        <td>{{ i['product_name'] }}</td>
+        <td>{{ i['quantity'] }}</td>
+        <td>₹{{ "%.2f"|format(i['unit_price']) }}</td>
+        <td>₹{{ "%.2f"|format(i['line_total']) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="cart-total">
+    <span>Grand total</span>
+    <span>₹{{ "%.2f"|format(order['total_amount']) }}</span>
+  </div>
+</div>
+
+<a href="{{ url_for('main.orders_page') }}" class="btn" style="margin-top: 20px;">← Back to orders</a>
+{% endblock %}

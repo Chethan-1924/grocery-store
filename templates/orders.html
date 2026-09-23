@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+<div class="page-head">
+  <span class="eyebrow">History</span>
+  <h1 class="page-title">Order History</h1>
+</div>
+
+<div class="card panel">
+  {% if orders %}
+  <table class="data-table">
+    <thead><tr><th>Order #</th><th>Cashier</th><th>Total</th><th>Date</th><th></th></tr></thead>
+    <tbody>
+      {% for o in orders %}
+      <tr>
+        <td>{{ o['order_number'] }}</td>
+        <td>{{ o['username'] or '—' }}</td>
+        <td>₹{{ "%.2f"|format(o['total_amount']) }}</td>
+        <td class="dim">{{ o['created_at'] }}</td>
+        <td><a href="{{ url_for('main.order_detail', order_id=o['id']) }}" class="link">view</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="dim">No orders yet.</p>
+  {% endif %}
+</div>
+{% endblock %}

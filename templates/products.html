@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Products{% endblock %}
+{% block content %}
+<div class="page-head">
+  <span class="eyebrow">Inventory</span>
+  <h1 class="page-title">Products</h1>
+</div>
+
+<div class="card panel" style="margin-bottom: 20px;">
+  <h2>Add product</h2>
+  <form id="add-product-form" class="inline-form">
+    <input type="text" id="p-name" placeholder="Name" required />
+    <input type="text" id="p-category" placeholder="Category" />
+    <select id="p-unit" required></select>
+    <input type="number" id="p-price" placeholder="Price" step="0.01" min="0" required />
+    <input type="number" id="p-stock" placeholder="Stock qty" step="0.01" min="0" required />
+    <button type="submit" class="btn btn-primary">Add</button>
+  </form>
+  <p id="add-product-error" class="error-text"></p>
+</div>
+
+<div class="card panel">
+  <div class="panel-head">
+    <h2>All products</h2>
+    <input type="text" id="product-search" placeholder="Search products..." />
+  </div>
+  <table class="data-table" id="products-table">
+    <thead>
+      <tr><th>Name</th><th>Category</th><th>Unit</th><th>Price</th><th>Stock</th><th></th></tr>
+    </thead>
+    <tbody id="products-tbody"></tbody>
+  </table>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/products.js') }}"></script>
+{% endblock %}

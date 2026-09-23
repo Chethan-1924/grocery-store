@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="login-wrap">
+  <div class="card login-card">
+    <div class="login-brand">
+      <span class="brand-mark">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      </span>
+      <h1>FreshCart</h1>
+    </div>
+    <p class="muted" style="margin: 0 0 24px 0;">Sign in to manage billing and inventory.</p>
+
+    <form method="post">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required autofocus />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; margin-top: 8px;">
+        Sign in
+      </button>
+    </form>
+
+    <p class="hint">Demo login: <b>admin</b> / <b>admin123</b></p>
+    <p class="hint">Data resets periodically since this is a free-tier demo — feel free to add or edit things, nothing's permanent here.</p>
+  </div>
+</div>
+{% endblock %}
